@@ -1,0 +1,182 @@
+<div class="review-section color-{{ section.settings.color_scheme }}">
+<div class="swiper mySwiper page-width">
+    <h1>{{ section.settings.heading }}</h1>
+    <div class="swiper-wrapper">
+      {% for block in section.blocks %}
+      <div class="swiper-slide">
+        <img src="{{ block.settings.customer_image |image_url }}">
+        <h2>{{ block.settings.customer }}</h2>
+        <p>{{ block.settings.review_para }}</p>
+        <h3>{{ block.settings.customer_bio }}</h3>
+      </div>
+        {% endfor %}
+    </div>
+    <div class="swiper-button-next"> </div>
+    <div class="swiper-button-prev"> </div>
+    <div class="swiper-pagination"> </div>
+  </div>
+</div>
+  {% style %}
+    .swiper {
+      width: 100%;
+      height: 100%;
+    }
+    .swiper {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .swiper h1{
+      text-align: center;
+      font-size: 36px;
+    }
+    .swiper p {
+      font-size: 16px;
+    }
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .swiper-slide img {
+      display: block;
+      max-width: 200px;
+      height: 200px;
+      border-radius:50%;
+      object-fit: cover;
+      margin: auto;
+    }
+    /* .swiper-slide p{
+        text-align: center;
+        margin: 0px 140px;
+    } */
+    @media screen and (max-width:680px){
+       .swiper-slide p {
+         font-size: 15px;
+       }
+    }
+    .swiper-wrapper {
+      margin-bottom: 50px;
+    }
+    .swiper-backface-hidden .swiper-slide {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 30px;
+      height: auto;
+    }
+    .rating-star {
+      margin-top: 24px;
+      display: flex;
+      justify-content: center;
+    }
+    .rating-star img {
+      width: 27px;
+      height: 27px;
+      margin: 0;
+    }
+  {% endstyle %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  {% comment %}
+    
+  
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: 2.5,
+      spaceBetween: 30,
+      centeredSlides: true,
+      loop: true,
+      speed: 800,
+      pagination: {
+        el: ".swiper-pagination",
+        type: "fraction",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  </script>
+  {% endcomment %}
+  <script>
+  var swiper = new Swiper(".mySwiper", {
+    slidesPerView: 1, // Default for smaller screens
+    spaceBetween: 10, // Default for smaller screens
+    centeredSlides: true,
+    loop: true,
+    speed: 800,
+    pagination: {
+      el: ".swiper-pagination",
+      type: "fraction",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    breakpoints: {
+      // When screen width is 681px or larger
+      681: {
+        slidesPerView: 2.5, // Show 2.5 slides for larger screens
+        spaceBetween: 30,   // Space between slides for larger screens
+      },
+    },
+  });
+</script>
+
+{% schema %}
+{
+    "name": "Customer Review",
+    "settings": [
+      {
+        "type": "inline_richtext",
+        "id": "heading",
+        "default": "my <i>inline</i> <b>text</b>",
+        "label": "Inline rich text"
+      },
+      {
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "default": "scheme_1",
+          "label": "Color Scheme"
+      },
+    ],
+    "blocks": [
+      {
+        "type": "content",
+        "name": "content",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "customer_image",
+            "label": "Customer Image"
+          },
+          {
+            "type": "inline_richtext",
+            "id": "review_para",
+            "default": "my <i>inline</i> <b>text</b>",
+            "label": "Inline rich text"
+          },
+          {
+            "type": "inline_richtext",
+            "id": "customer",
+            "default": "my <i>inline</i> <b>text</b>",
+            "label": "Inline rich text"
+          },
+          {
+            "type": "inline_richtext",
+            "id": "customer_bio",
+            "default": "my <i>inline</i> <b>text</b>",
+            "label": "Inline rich text"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Customer Review",
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,124 @@
+<div class="image-up-down-container page-width color-{{ section.settings.color_scheme }}">
+  <div class="image-up-down">
+    {% for block in section.blocks %}
+      <div class="image-text">
+        <p>{{ block.settings.inline_text }}</p>
+        <div class="pic">
+          <img src="{{ block.settings.image | image_url }}" alt="">
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+<div class="btn">
+  {% if section.settings.button_label != blank %}
+    <a
+      {% if section.settings.button_link == blank %}
+        role="link" aria-disabled="true"
+      {% else %}
+        href="{{ section.settings.button_link }}"
+      {% endif %}
+      class="button{% if section.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"
+      {{ section.shopify_attributes }}
+    >
+      {{ section.settings.button_label | escape }}
+    </a>
+  {% endif %}
+</div>
+</div>
+
+{% style %}
+  .image-up-down-container {
+    padding: 80px 0;
+    max-width: 100%;
+  }
+  .image-up-down {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 60px;
+  }
+  .image-text img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+  .image-text {
+    display: flex;
+    flex-direction: column;
+    max-width: 450px;
+  }
+  .pic {
+    max-width: 300px;
+    line-height: 0;
+    margin: auto;
+  }
+  @media (min-width: 1024px) {
+    .image-text:nth-child(even) {
+      flex-direction: column-reverse;
+    }
+  }
+  .image-text img:hover {
+    transform: scale(1.1);
+  }
+  .btn {
+    display: flex;
+    justify-content: center;
+    margin: 50px 0;
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Image Up Down",
+  "settings": [
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "default": "scheme_1"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_style_secondary",
+      "label": "Secondary Button Style"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Image and Text",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "inline_text",
+          "label": "Inline rich text",
+          "default": "My <i>inline</i> <b>text</b>"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Up Down",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}

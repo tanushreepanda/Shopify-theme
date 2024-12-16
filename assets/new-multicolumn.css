@@ -1,0 +1,39 @@
+.new_multicolumn .multicolumn-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.new_multicolumn .multicolumn-list {
+  column-gap: 0;
+}
+.new_multicolumn .multicolumn-card__info .rte{
+  max-width: 205px;
+}
+.new_multicolumn .multicolumn-card__image-wrapper {
+  width: 100px;
+}
+@media screen and (max-width: 680px) {
+    .new_multicolumn .multicolumn-list {
+      border-top: none!important;
+      border-bottom: none!important;
+  }
+   .new_multicolumn .multicolumn-card {
+    border-right: none!important;
+  }
+    .new_multicolumn .multicolumn-card {
+    gap: 20px;
+  }
+  .new_multicolumn .rte{
+    max-width: 304px;
+  }
+}
+.new_multicolumn .multicolumn-list {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+.new_multicolumn .multicolumn-list .multicolumn-list__item:last-child .multicolumn-card {
+  border-right: 0;
+}
+.new_multicolumn .multicolumn-card {
+  border-right: 1px solid black;
+}
